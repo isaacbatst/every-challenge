@@ -46,4 +46,16 @@ export class User {
       throw new Error('NAME_LENGTH_ABOVE_MAX')
     }
   }
+
+  getEmail() {
+    return this.email
+  }
+
+  getName() {
+    return this.name
+  }
+
+  getPassword() {
+    return this.password;
+  }
 }
