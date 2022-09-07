@@ -11,7 +11,7 @@
 - [X] Create User
 - [X] Authenticate User
 - [X] Create Task
-- [ ] Get My Tasks
+- [X] Get My Tasks
 - [ ] Change Task Status
 
 ### User
