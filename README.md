@@ -6,7 +6,7 @@
 - [X] Authenticate User
 - [X] Create Task
 - [X] Get My Tasks
-- [ ] Change Task Status
+- [X] Change Task Status
 ### Application
 - [ ] Create User
 - [ ] Authenticate User
