@@ -14,13 +14,12 @@ describe('User', () => {
   })
 
   describe('Given an invalid password', () => {
-    // check readme for valid password
     it('should throw INVALID_PASSWORD error', () => {
       expect(() => {
         new User({
           email: 'any@email.com',
           name: 'any-name',
-          password: 'invalid-password'
+          password: 'invalid'
         })
       }).toThrow('INVALID_PASSWORD')
     })
