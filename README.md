@@ -8,8 +8,8 @@
 - [X] Get My Tasks
 - [X] Change Task Status
 ### Application
-- [ ] Create User
-- [ ] Authenticate User
+- [X] Create User
+- [X] Authenticate User
 - [ ] Create Task
 - [ ] Get My Tasks
 - [ ] Change Task Status
@@ -22,3 +22,8 @@
 - Title: Minimum one character, up to 50.
 - Description: Minimum one character, up to 200.
 - Status: TODO, IN_PROGRESS, DONE, ARCHIVED
+
+
+### Local Setup
+- Create a `.env` with required fields (see `.env.example`)
+- Have a MongoDB 4.2+ server with a replica set deployment.
