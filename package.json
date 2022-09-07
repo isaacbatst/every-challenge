@@ -5,6 +5,9 @@
   "repository": "git@github.com:isaacbatst/every-challenge.git",
   "author": "Isaac Batista <isaacbatst@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
     "@types/jest": "^29.0.0",
     "jest": "^29.0.2",
