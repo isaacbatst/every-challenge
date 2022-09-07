@@ -1,4 +1,5 @@
 import { Task, TaskDTO, TaskStatus } from "../../entities/Task/Task";
+import { TokenDecoder } from "../../interfaces/TokenDecoder";
 import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface CreateTaskParams {
@@ -12,14 +13,10 @@ export interface CreateTaskRepository {
   create(task: TaskDTO, userId: string): Promise<void>
 }
 
-export interface CreateTaskTokenDecoder {
-  decode(token: string): TokenPayload
-}
-
 export class CreateTaskUseCase {
   constructor(
     private repository: CreateTaskRepository,
-    private tokenDecoder: CreateTaskTokenDecoder
+    private tokenDecoder: TokenDecoder
   ){}
 
   async execute(params: CreateTaskParams) {

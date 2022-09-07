@@ -1,11 +1,12 @@
 import { TaskStatus } from "../../entities/Task/Task"
-import { CreateTaskRepository, CreateTaskTokenDecoder, CreateTaskUseCase } from "./CreateTaskUseCase"
+import { TokenDecoder } from "../../interfaces/TokenDecoder"
+import { CreateTaskRepository, CreateTaskUseCase } from "./CreateTaskUseCase"
 
 class RepositoryMock implements CreateTaskRepository {
   create = jest.fn()
 }
 
-class TokenDecoderMock implements CreateTaskTokenDecoder {
+class TokenDecoderMock implements TokenDecoder {
   decode = jest.fn(() => ({ id: 'any-id' }))
 }
 

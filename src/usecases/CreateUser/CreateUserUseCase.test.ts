@@ -1,16 +1,17 @@
 import { UserToBeCreatedDTO, UserToBeCreatedEncrypter } from "../../entities/User/UserToBeCreated"
-import { CreateUserRepository, CreateUserUseCase, CreateUserTokenGenerator } from "./CreateUserUseCase"
+import { TokenGenerator } from "../../interfaces/TokenGenerator"
+import { CreateUserRepository, CreateUserUseCase } from "./CreateUserUseCase"
 
 class EncrypterMock implements UserToBeCreatedEncrypter {
   hash = jest.fn()
 }
 
-class TokenGeneratorMock implements CreateUserTokenGenerator {
+class TokenGeneratorMock implements TokenGenerator {
   generate = jest.fn()
 }
 
 class CreateUserRepositoryMock implements CreateUserRepository {
-  create = jest.fn()
+  create = jest.fn(async () => ({ id: 'any-id' }))
 }
 
 const validUser: UserToBeCreatedDTO = { 
