@@ -1,18 +1,17 @@
-interface UserParams {
+export interface UserDTO {
   email: string,
   name: string,
   password: string
 }
 
 export class User {
-  static PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
   static EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   private email: string;
   private name: string;
   private password: string;
 
-  constructor(params: UserParams) {
+  constructor(params: UserDTO) {
     this.validateEmail(params.email);
     this.validatePassword(params.password);
     this.validateName(params.name)
@@ -31,7 +30,7 @@ export class User {
   }
 
   private validatePassword(password: string) {
-    const isValid = User.PASSWORD_REGEX.test(password);
+    const isValid = password.length >= 8;
 
     if(!isValid) {
       throw new Error('INVALID_PASSWORD')
