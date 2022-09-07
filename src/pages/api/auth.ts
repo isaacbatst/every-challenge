@@ -2,7 +2,7 @@ import { NextApiHandler } from "next";
 import { ApiErrorHandler } from "../../application/ApiErrorHandler";
 import { BcrypEncrypter } from "../../application/BcryptEncrypter";
 import { CookiesManager } from "../../application/CookiesManager";
-import { JwtTokenGenerator } from "../../application/JwtTokenGenerator";
+import { JwtTokenHandler } from "../../application/JwtTokenGenerator";
 import { ValidationError } from "../../errors/ValidationError";
 import { PrismaUserRepository } from "../../infra/repositories/PrismaUserRepository";
 import { AuthenticateUserUseCase } from "../../usecases/AuthenticateUser/AuthenticateUserUseCase";
@@ -17,12 +17,12 @@ const handler: NextApiHandler = async (req, res) => {
 
 const handleAuth: NextApiHandler = async (req, res) => {
   try {
-    const tokenGenerator = new JwtTokenGenerator();
+    const tokenGenerator = new JwtTokenHandler();
     const encrypter = new BcrypEncrypter();
     const repository = new PrismaUserRepository();
     const usecase = new AuthenticateUserUseCase(repository, encrypter, tokenGenerator);
 
-    const { email, password } = req.body;
+    const { email, password } = req.body as Record<string, unknown>;
 
     if(!email || typeof email !== 'string'){
       throw new ValidationError('INVALID_EMAIL');
@@ -39,9 +39,7 @@ const handleAuth: NextApiHandler = async (req, res) => {
 
     CookiesManager.setToken(req, res, token);
     
-    // returning token ALSO bellow to ease testing via apps like insomnia/postman
-    // but it has been already set on http only cookie
-    return res.status(200).json({ token })
+    return res.status(200).end();
   } catch (err) {
     ApiErrorHandler.handle(err, res)
   }

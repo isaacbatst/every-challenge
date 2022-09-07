@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export class CookiesManager {
   private static AUTHORIZATION_NAME = 'Every-todo-app-Authorization';
 
-  private static SECONDS_IN_A_DAY =  24 * 60 * 60;
+  private static SECONDS_IN_A_DAY =  24 * 60 * 60 * 1000;
   private static EXPIRATION_TIME = this.SECONDS_IN_A_DAY;
 
   private static getAuthorizationName() {
@@ -21,8 +21,16 @@ export class CookiesManager {
     const authorizationName = CookiesManager.getAuthorizationName();
   
     cookies.set(authorizationName, token, {
-      maxAge: CookiesManager.getExpirationTime()
+      maxAge: CookiesManager.getExpirationTime(),
+      httpOnly: true
     });
   }
+
+  static getToken = (req: NextApiRequest, res: NextApiResponse) => {
+    const cookies = new Cookies(req, res);
+      
+    const authorizationName = CookiesManager.getAuthorizationName();
   
+    return cookies.get(authorizationName);
+  }
 }

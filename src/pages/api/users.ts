@@ -3,7 +3,7 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { ApiErrorHandler } from "../../application/ApiErrorHandler";
 import { BcrypEncrypter } from "../../application/BcryptEncrypter";
 import { CookiesManager } from "../../application/CookiesManager";
-import { JwtTokenGenerator } from "../../application/JwtTokenGenerator";
+import { JwtTokenHandler } from "../../application/JwtTokenGenerator";
 import { ValidationError } from "../../errors/ValidationError";
 import { PrismaUserRepository } from "../../infra/repositories/PrismaUserRepository";
 import { CreateUserUseCase } from "../../usecases/CreateUser/CreateUserUseCase";
@@ -20,7 +20,7 @@ const handleCreateUser: NextApiHandler = async (req, res) => {
   try {
     const repository = new PrismaUserRepository();
     const encrypter = new BcrypEncrypter();
-    const tokenGenerator = new JwtTokenGenerator();
+    const tokenGenerator = new JwtTokenHandler();
 
     const usecase = new CreateUserUseCase(encrypter, repository, tokenGenerator);
 
@@ -48,7 +48,7 @@ const handleCreateUser: NextApiHandler = async (req, res) => {
 
     // returning token ALSO bellow to ease testing via apps like insomnia/postman
     // but it has been already set on http only cookie
-    return res.status(201).json({ token })
+    return res.status(201).end();
   } catch (err) {
     return ApiErrorHandler.handle(err, res)
   }
