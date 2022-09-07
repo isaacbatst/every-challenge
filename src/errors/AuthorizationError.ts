@@ -1,1 +1,3 @@
-export class AuthorizationError extends Error {}
+export class AuthorizationError extends Error {
+  name = 'AuthorizationError'
+}

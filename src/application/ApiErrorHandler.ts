@@ -7,29 +7,22 @@ import { NotFoundError } from "../errors/NotFoundError";
 import { ValidationError } from "../errors/ValidationError";
 
 export class ApiErrorHandler {
+  static errorToCode: Record<string, number> = {
+    ValidationError: 400,
+    BadEntityError: 422,
+    AuthenticationError: 401,
+    ConflictError: 409,
+    NotFoundError: 404,
+    AuthorizationError: 403,
+  }
+
   static handle(err: unknown, res: NextApiResponse) {
-    if(err instanceof ValidationError) {
-      return res.status(400).json({ error: err.message })
-    }
-
-    if(err instanceof BadEntityError) {
-      return res.status(422).json({ error: err.message })
-    }
-
-    if(err instanceof AuthenticationError) {
-      return res.status(401).json({ error: err.message })
-    }
-
-    if(err instanceof ConflictError) {
-      return res.status(409).json({ error: err.message })
-    }
-
-    if(err instanceof NotFoundError) {
-      return res.status(404).json({ error: err.message })
-    }
-
-    if(err instanceof AuthorizationError) {
-      return res.status(403).json({ error: err.message })
+    if(err instanceof Error) {
+      const code = this.errorToCode[err.name];
+    
+      if(this.errorToCode[err.name]) {
+        return res.status(code).json(err.message)
+      }
     }
 
     console.error(err)

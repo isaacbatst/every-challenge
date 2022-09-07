@@ -1,13 +1,22 @@
-import { TaskStatus } from "../../entities/Task/Task";
+import { TaskDTOWithIds, TaskStatus } from "../../entities/Task/Task";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
 import { ChangeTaskStatusRepository, ChangeTaskStatusUseCase } from "./ChangeTaskStatusUseCase"
 
 class TokenDecoderMock implements TokenDecoder {
-  decode = jest.fn(() => ({ id: 'any-id' }));
+  decode = jest.fn(() => ({ id: 'any-user-id' }));
+}
+
+const task: TaskDTOWithIds = {
+  description: 'any-description',
+  id: 'any-task-id',
+  status: TaskStatus.TODO,
+  title: 'any-title',
+  userId: 'any-user-id'
 }
 
 class RepositoryMock implements ChangeTaskStatusRepository {
   updateTaskStatus = jest.fn();
+  getTaskById = jest.fn(async () => task);
 }
 
 const makeSut = () => {
