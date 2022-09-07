@@ -16,7 +16,7 @@ export class Email {
     }
   }
 
-  getAddress(): string {
+  getEmail(): string {
     return this.address;
   }
 }

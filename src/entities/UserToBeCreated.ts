@@ -39,7 +39,7 @@ export class UserToBeCreated {
   }
 
   getEmail(): string {
-    return this.email.getAddress();
+    return this.email.getEmail();
   }
 
   getName(): string {

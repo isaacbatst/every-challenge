@@ -5,30 +5,6 @@ class EncrypterMock implements UserToBeCreatedEncrypter {
 }
 
 describe('UserToCreate', () => {
-  describe('Given an invalid email', () => {
-    it('should throw INVALID_EMAIL error', () => {
-      expect(() => {
-        new UserToBeCreated({
-          email: 'invalid-email',
-          name: 'any-name',
-          password: 'any-password'
-        }, new EncrypterMock())
-      }).toThrow('INVALID_EMAIL')
-    })
-  })
-
-  describe('Given an invalid password', () => {
-    it('should throw INVALID_PASSWORD error', () => {
-      expect(() => {
-        new UserToBeCreated({
-          email: 'any@email.com',
-          name: 'any-name',
-          password: 'invalid'
-        }, new EncrypterMock())
-      }).toThrow('INVALID_PASSWORD')
-    })
-  })
-
   describe('Given a bellow min length name', () => {
     it('should throw NAME_LENGTH_BELLOW_MIN error', () => {
       expect(() => {
