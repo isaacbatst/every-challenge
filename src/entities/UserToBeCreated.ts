@@ -1,4 +1,5 @@
 import { Email } from "./Email";
+import { Password } from "./Password";
 
 export interface UserToBeCreatedDTO {
   email: string,
@@ -16,22 +17,15 @@ export class UserToBeCreated {
   private password: string;
 
   constructor(params: UserToBeCreatedDTO, encrypter: UserToBeCreatedEncrypter) {
-    this.validatePassword(params.password);
+    const email =  new Email(params.email);
+    const password = new Password(params.password);
     this.validateName(params.name)
 
-    const hash = encrypter.hash(params.password);
+    const hash = encrypter.hash(password.getPassword());
 
-    this.email = new Email(params.email);
-    this.name = params.name;
+    this.email = email;
     this.password = hash;
-  }
-
-  private validatePassword(password: string) {
-    const isValid = password.length >= 8;
-
-    if(!isValid) {
-      throw new Error('INVALID_PASSWORD')
-    }
+    this.name = params.name;
   }
 
   private validateName(name: string) {
