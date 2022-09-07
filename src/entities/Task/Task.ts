@@ -10,6 +10,12 @@ export enum TaskStatus {
 interface TaskParams {
   title: string;
   description: string;
+  status: string;
+}
+
+export interface TaskDTO {
+  title: string;
+  description: string;
   status: TaskStatus;
 }
 
@@ -21,6 +27,10 @@ export class Task {
   constructor(params: TaskParams) {
     this.validateTitle(params.title);
     this.validateDescription(params.description);
+    
+    if(!this.isValidStatus(params.status)){
+      throw new Error('INVALID_STATUS')
+    }
 
     this.description = params.description;
     this.title = params.title;
@@ -47,6 +57,10 @@ export class Task {
     }
   }
 
+  private isValidStatus(status: string): status is TaskStatus {
+    return status in TaskStatus
+  }
+
   getTitle(): string {
     return this.title;
   }
@@ -55,7 +69,7 @@ export class Task {
     return this.description;
   }
 
-  getStatus(): string {
+  getStatus(): TaskStatus {
     return this.status;
   }
 }
