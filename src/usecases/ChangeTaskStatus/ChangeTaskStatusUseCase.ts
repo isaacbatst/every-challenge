@@ -1,4 +1,5 @@
 import { Task, TaskStatus } from "../../entities/Task/Task";
+import { BadEntityError } from "../../errors/BadEntityError";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
 
 interface ChangeTaskStatusParams {
@@ -25,7 +26,7 @@ export class ChangeTaskStatusUseCase {
     const isValidStatus = Task.isValidStatus(status);
 
     if(!isValidStatus) {
-      throw new Error('INVALID_STATUS')
+      throw new BadEntityError('INVALID_STATUS')
     }
 
     await this.repository.updateTaskStatus(taskId, status, id);

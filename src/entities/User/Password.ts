@@ -1,3 +1,5 @@
+import { ValidationError } from "../../errors/ValidationError";
+
 export class Password {
   private password: string;
 
@@ -12,7 +14,7 @@ export class Password {
     const isValid = password.length >= 8;
 
     if(!isValid) {
-      throw new Error('INVALID_PASSWORD')
+      throw new ValidationError('INVALID_PASSWORD')
     }
   }
 

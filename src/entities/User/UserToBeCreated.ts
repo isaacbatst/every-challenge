@@ -1,3 +1,4 @@
+import { ValidationError } from "../../errors/ValidationError";
 import { Email } from "./Email";
 import { Password } from "./Password";
 
@@ -29,11 +30,11 @@ export class UserToBeCreated {
 
   private validateName(name: string) {
     if(name.length < 2){
-      throw new Error('NAME_LENGTH_BELLOW_MIN')
+      throw new ValidationError('NAME_LENGTH_BELLOW_MIN')
     }
 
     if(name.length > 80) {
-      throw new Error('NAME_LENGTH_ABOVE_MAX')
+      throw new ValidationError('NAME_LENGTH_ABOVE_MAX')
     }
   }
 

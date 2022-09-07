@@ -1,4 +1,5 @@
 import { UserToBeAuthenticated, UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
+import { AuthenticationError } from "../../errors/AuthenticationError";
 import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface AuthenticateUserParams {
@@ -36,13 +37,13 @@ export class AuthenticateUserUseCase {
     const userFoundByEmail = await this.repository.getUserByEmail(user.getEmail());
 
     if(!userFoundByEmail) {
-      throw new Error('INVALID_AUTHENTICATION');
+      throw new AuthenticationError('INVALID_AUTHENTICATION');
     }
 
     const isValidPassword = await this.encrypter.compare(user.getPassword(), userFoundByEmail.password);
 
     if(!isValidPassword) {
-      throw new Error('INVALID_AUTHENTICATION');
+      throw new AuthenticationError('INVALID_AUTHENTICATION');
     }
 
     const token = this.tokenGenerator.generate({ id: userFoundByEmail.id });

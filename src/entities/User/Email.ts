@@ -1,3 +1,5 @@
+import { ValidationError } from "../../errors/ValidationError";
+
 export class Email {
   static EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -12,7 +14,7 @@ export class Email {
     const isValid = Email.EMAIL_REGEX.test(address);
 
     if(!isValid) {
-      throw new Error('INVALID_EMAIL')
+      throw new ValidationError('INVALID_EMAIL')
     }
   }
 

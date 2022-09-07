@@ -1,9 +1,5 @@
 import { UserToBeCreated, UserToBeCreatedEncrypter } from "./UserToBeCreated"
 
-class EncrypterMock implements UserToBeCreatedEncrypter {
-  hash = jest.fn()
-}
-
 describe('UserToCreate', () => {
   describe('Given a bellow min length name', () => {
     it('should throw NAME_LENGTH_BELLOW_MIN error', () => {
@@ -12,7 +8,7 @@ describe('UserToCreate', () => {
           email: 'any@email.com',
           name: 'a',
           password: '1234567a'
-        }, new EncrypterMock())
+        })
       }).toThrow('NAME_LENGTH_BELLOW_MIN')
     })
   })
@@ -24,7 +20,7 @@ describe('UserToCreate', () => {
           email: 'any@email.com',
           name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
           password: '1234567a'
-        }, new EncrypterMock())
+        })
       }).toThrow('NAME_LENGTH_ABOVE_MAX')
     })
   })

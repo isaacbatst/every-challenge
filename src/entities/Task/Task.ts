@@ -1,4 +1,7 @@
 // In real life I would check if the product team see this status easily changing
+
+import { ValidationError } from "../../errors/ValidationError";
+
 // If so, a database persisted status could be better, allowing to edit them via some dashboard
 export enum TaskStatus {
   TODO = 'TODO',
@@ -29,7 +32,7 @@ export class Task {
     this.validateDescription(params.description);
     
     if(!Task.isValidStatus(params.status)){
-      throw new Error('INVALID_STATUS')
+      throw new ValidationError('INVALID_STATUS')
     }
 
     this.description = params.description;
@@ -39,21 +42,21 @@ export class Task {
 
   private validateTitle(title: string) {
     if(title.length < 1) {
-      throw new Error('INVALID_TITLE_LENGTH_BELLOW_MIN')
+      throw new ValidationError('INVALID_TITLE_LENGTH_BELLOW_MIN')
     } 
 
     if(title.length > 50) {
-      throw new Error('INVALID_TITLE_LENGTH_ABOVE_MAX')
+      throw new ValidationError('INVALID_TITLE_LENGTH_ABOVE_MAX')
     }
   }
 
   private validateDescription(description: string) {
     if(description.length < 1) {
-      throw new Error('INVALID_DESCRIPTION_LENGTH_BELLOW_MIN')
+      throw new ValidationError('INVALID_DESCRIPTION_LENGTH_BELLOW_MIN')
     } 
 
     if(description.length > 200) {
-      throw new Error('INVALID_DESCRIPTION_LENGTH_ABOVE_MAX')
+      throw new ValidationError('INVALID_DESCRIPTION_LENGTH_ABOVE_MAX')
     }
   }
 
