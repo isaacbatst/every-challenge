@@ -5,7 +5,6 @@ interface UserParams {
 }
 
 export class User {
-  // Minimum eight characters, at least one letter and one number
   static PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
   static EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -40,10 +39,12 @@ export class User {
   }
 
   private validateName(name: string) {
-    const isValid = name.length > 1 && name.length < 80
+    if(name.length < 2){
+      throw new Error('NAME_LENGTH_BELLOW_MIN')
+    }
 
-    if(!isValid) {
-      throw new Error('INVALID_NAME')
+    if(name.length > 80) {
+      throw new Error('NAME_LENGTH_ABOVE_MAX')
     }
   }
 }
