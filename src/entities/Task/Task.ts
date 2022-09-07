@@ -28,7 +28,7 @@ export class Task {
     this.validateTitle(params.title);
     this.validateDescription(params.description);
     
-    if(!this.isValidStatus(params.status)){
+    if(!Task.isValidStatus(params.status)){
       throw new Error('INVALID_STATUS')
     }
 
@@ -57,7 +57,7 @@ export class Task {
     }
   }
 
-  private isValidStatus(status: string): status is TaskStatus {
+  static isValidStatus(status: string): status is TaskStatus {
     return status in TaskStatus
   }
 
