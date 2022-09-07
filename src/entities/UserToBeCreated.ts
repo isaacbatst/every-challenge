@@ -1,32 +1,29 @@
-export interface UserDTO {
+import { Email } from "./Email";
+
+export interface UserToBeCreatedDTO {
   email: string,
   name: string,
   password: string
 }
 
-export class User {
-  static EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+export interface UserToBeCreatedEncrypter {
+  hash(value: string): string
+}
 
-  private email: string;
+export class UserToBeCreated {
+  private email: Email;
   private name: string;
   private password: string;
 
-  constructor(params: UserDTO) {
-    this.validateEmail(params.email);
+  constructor(params: UserToBeCreatedDTO, encrypter: UserToBeCreatedEncrypter) {
     this.validatePassword(params.password);
     this.validateName(params.name)
 
-    this.email = params.email;
-    this.password = params.password;
+    const hash = encrypter.hash(params.password);
+
+    this.email = new Email(params.email);
     this.name = params.name;
-  }
-
-  private validateEmail(email: string) {
-    const isValid = User.EMAIL_REGEX.test(email);
-
-    if(!isValid) {
-      throw new Error('INVALID_EMAIL')
-    }
+    this.password = hash;
   }
 
   private validatePassword(password: string) {
@@ -47,15 +44,15 @@ export class User {
     }
   }
 
-  getEmail() {
-    return this.email
+  getEmail(): string {
+    return this.email.getAddress();
   }
 
-  getName() {
+  getName(): string {
     return this.name
   }
 
-  getPassword() {
+  getPassword(): string {
     return this.password;
   }
 }

@@ -1,11 +1,11 @@
-import { UserDTO } from "../../entities/User"
-import { CreateUserRepository, CreateUserUseCase, Encrypter, TokenGenerator } from "./CreateUserUseCase"
+import { UserToBeCreatedDTO, UserToBeCreatedEncrypter } from "../../entities/UserToBeCreated"
+import { CreateUserRepository, CreateUserUseCase, CreateUserTokenGenerator } from "./CreateUserUseCase"
 
-class EncrypterMock implements Encrypter {
+class EncrypterMock implements UserToBeCreatedEncrypter {
   hash = jest.fn()
 }
 
-class TokenGeneratorMock implements TokenGenerator {
+class TokenGeneratorMock implements CreateUserTokenGenerator {
   generate = jest.fn()
 }
 
@@ -13,7 +13,7 @@ class CreateUserRepositoryMock implements CreateUserRepository {
   create = jest.fn()
 }
 
-const validUser: UserDTO = { 
+const validUser: UserToBeCreatedDTO = { 
   email: 'any@email.com',
   name: 'any-name',
   password: '1234567#a'

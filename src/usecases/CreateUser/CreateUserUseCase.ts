@@ -1,4 +1,4 @@
-import { UserDTO, User } from "../../entities/User";
+import { UserToBeCreatedDTO, UserToBeCreated, UserToBeCreatedEncrypter } from "../../entities/UserToBeCreated";
 
 interface CreateUserParams {
   name: string;
@@ -6,34 +6,28 @@ interface CreateUserParams {
   password: string;
 }
 
-export interface Encrypter {
-  hash(value: string): string
-}
-
 export interface CreateUserRepository {
-  create(user: UserDTO): Promise<void>
+  create(user: UserToBeCreatedDTO): Promise<void>
 }
 
-export interface TokenGenerator {
+export interface CreateUserTokenGenerator {
   generate(): string
 }
 
 export class CreateUserUseCase {
   constructor(
-    private encrypter: Encrypter,
+    private encrypter: UserToBeCreatedEncrypter,
     private repository: CreateUserRepository,
-    private tokenGenerator: TokenGenerator
+    private tokenGenerator: CreateUserTokenGenerator
   ){}
 
   async execute(params: CreateUserParams) {
-    const user = new User(params);
-
-    const hash = this.encrypter.hash(user.getPassword());
+    const user = new UserToBeCreated(params, this.encrypter);
 
     await this.repository.create({
       email: user.getEmail(),
       name: user.getName(),
-      password: hash
+      password: user.getPassword()
     })
 
     const token = this.tokenGenerator.generate();
