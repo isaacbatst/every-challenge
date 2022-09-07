@@ -8,7 +8,7 @@ export interface UserToBeCreatedDTO {
 }
 
 export interface UserToBeCreatedEncrypter {
-  hash(value: string): string
+  hash(value: string): Promise<string>
 }
 
 export class UserToBeCreated {
@@ -16,15 +16,14 @@ export class UserToBeCreated {
   private name: string;
   private password: string;
 
-  constructor(params: UserToBeCreatedDTO, encrypter: UserToBeCreatedEncrypter) {
+  constructor(params: UserToBeCreatedDTO) {
     const email =  new Email(params.email);
     const password = new Password(params.password);
     this.validateName(params.name)
 
-    const hash = encrypter.hash(password.getPassword());
 
     this.email = email;
-    this.password = hash;
+    this.password = password.getPassword();
     this.name = params.name;
   }
 

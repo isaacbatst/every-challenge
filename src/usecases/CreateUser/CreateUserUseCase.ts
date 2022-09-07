@@ -19,12 +19,14 @@ export class CreateUserUseCase {
   ){}
 
   async execute(params: CreateUserParams) {
-    const user = new UserToBeCreated(params, this.encrypter);
+    const user = new UserToBeCreated(params);
+
+    const hash = await this.encrypter.hash(user.getPassword());
 
     const { id } = await this.repository.create({
       email: user.getEmail(),
       name: user.getName(),
-      password: user.getPassword()
+      password: hash
     })
 
     const token = this.tokenGenerator.generate({ id });
