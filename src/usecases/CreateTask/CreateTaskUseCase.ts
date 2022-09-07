@@ -1,6 +1,5 @@
-import { Task, TaskDTO, TaskStatus } from "../../entities/Task/Task";
+import { Task, TaskDTO } from "../../entities/Task/Task";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
-import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface CreateTaskParams {
   title: string;

@@ -5,8 +5,12 @@ interface GetMyTasksParams {
   token: string
 }
 
+export interface TaskDTOWithId extends TaskDTO { 
+  id: string 
+}
+
 export interface GetMyTasksRepository {
-  getTasksByUserId(userId: string): Promise<TaskDTO[]>
+  getTasksByUserId(userId: string): Promise<TaskDTOWithId[]>
 }
 
 export class GetMyTasksUseCase {

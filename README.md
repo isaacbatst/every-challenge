@@ -10,7 +10,7 @@
 ### Application
 - [X] Create User
 - [X] Authenticate User
-- [ ] Create Task
+- [X] Create Task
 - [ ] Get My Tasks
 - [ ] Change Task Status
 

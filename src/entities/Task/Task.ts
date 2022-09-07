@@ -1,8 +1,7 @@
-// In real life I would check if the product team see this status easily changing
-
 import { ValidationError } from "../../errors/ValidationError";
 
-// If so, a database persisted status could be better, allowing to edit them via some dashboard
+// In real life I would check if the product team see this status easily changing
+// If so, a database persisted dynamic status could be better, allowing to edit them via some dashboard
 export enum TaskStatus {
   TODO = 'TODO',
   IN_PROGRESS = 'IN_PROGRESS',
