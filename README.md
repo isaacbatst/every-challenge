@@ -5,14 +5,14 @@
 - [X] Create User
 - [X] Authenticate User
 - [X] Create Task
-- [] Get My Tasks
-- [] Change Task Status
+- [X] Get My Tasks
+- [ ] Change Task Status
 ### Application
-- [] Create User
-- [] Authenticate User
-- [] Create Task
-- [] Get My Tasks
-- [] Change Task Status
+- [ ] Create User
+- [ ] Authenticate User
+- [ ] Create Task
+- [ ] Get My Tasks
+- [ ] Change Task Status
 
 ### User
 #### Validations
