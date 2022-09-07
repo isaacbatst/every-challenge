@@ -1,4 +1,4 @@
-import { UserToBeAuthenticated, UserToBeAuthenticatedDTO } from "../../entities/UserToBeAuthenticated";
+import { UserToBeAuthenticated, UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
 
 interface AuthenticateUserParams {
   email: string;

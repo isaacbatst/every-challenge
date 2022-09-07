@@ -1,4 +1,4 @@
-import { UserToBeCreatedDTO, UserToBeCreatedEncrypter } from "../../entities/UserToBeCreated"
+import { UserToBeCreatedDTO, UserToBeCreatedEncrypter } from "../../entities/User/UserToBeCreated"
 import { CreateUserRepository, CreateUserUseCase, CreateUserTokenGenerator } from "./CreateUserUseCase"
 
 class EncrypterMock implements UserToBeCreatedEncrypter {

@@ -1,4 +1,4 @@
-import { UserToBeCreatedDTO, UserToBeCreated, UserToBeCreatedEncrypter } from "../../entities/UserToBeCreated";
+import { UserToBeCreated, UserToBeCreatedDTO, UserToBeCreatedEncrypter } from "../../entities/User/UserToBeCreated";
 
 interface CreateUserParams {
   name: string;

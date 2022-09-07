@@ -1,4 +1,4 @@
-import { UserToBeAuthenticatedDTO } from "../../entities/UserToBeAuthenticated";
+import { UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
 import { AuthenticateUserRepository, AuthenticateUserUseCase, AuthenticateUserEncrypter, AuthenticateUserTokenGenerator } from "./AuthenticateUserUseCase";
 
 const validUser: UserToBeAuthenticatedDTO = {
