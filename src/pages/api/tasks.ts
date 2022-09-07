@@ -18,7 +18,6 @@ const handler: NextApiHandler = async (req, res) => {
     if(req.method === 'GET') {
       await handleGetMyTasks(req, res);
       return;
-
     }
 
     return res.status(405).end();

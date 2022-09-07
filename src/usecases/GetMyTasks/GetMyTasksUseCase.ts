@@ -1,16 +1,12 @@
-import { TaskDTO } from "../../entities/Task/Task";
+import { TaskDTOWithIds } from "../../entities/Task/Task";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
 
 interface GetMyTasksParams {
   token: string
 }
 
-export interface TaskDTOWithId extends TaskDTO { 
-  id: string 
-}
-
 export interface GetMyTasksRepository {
-  getTasksByUserId(userId: string): Promise<TaskDTOWithId[]>
+  getTasksByUserId(userId: string): Promise<TaskDTOWithIds[]>
 }
 
 export class GetMyTasksUseCase {

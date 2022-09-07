@@ -10,8 +10,6 @@ import { prisma } from '../prisma';
 export class PrismaUserRepository implements CreateUserRepository, AuthenticateUserRepository {
   async create(user: UserToBeCreatedDTO): Promise<{ id: string; }> {
     try {
-      await prisma.$connect();
-
       const created = await prisma.user.create({
         data: {
           email: user.email,
@@ -35,8 +33,6 @@ export class PrismaUserRepository implements CreateUserRepository, AuthenticateU
   }
 
   async getUserByEmail(email: string): Promise<(UserToBeAuthenticatedDTO & { id: string; }) | null> {
-    await prisma.$connect();
-
     const user = await prisma.user.findUnique({
       where: {
         email

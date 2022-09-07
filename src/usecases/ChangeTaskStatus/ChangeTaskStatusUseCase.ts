@@ -1,5 +1,7 @@
-import { Task, TaskStatus } from "../../entities/Task/Task";
+import { Task, TaskDTOWithIds, TaskStatus } from "../../entities/Task/Task";
+import { AuthorizationError } from "../../errors/AuthorizationError";
 import { BadEntityError } from "../../errors/BadEntityError";
+import { NotFoundError } from "../../errors/NotFoundError";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
 
 interface ChangeTaskStatusParams {
@@ -9,7 +11,8 @@ interface ChangeTaskStatusParams {
 }
 
 export interface ChangeTaskStatusRepository {
-  updateTaskStatus(taskId: string, status: TaskStatus, userId: string): Promise<void>
+  updateTaskStatus(taskId: string, status: TaskStatus): Promise<void>,
+  getTaskById(taskId: string): Promise<TaskDTOWithIds | null>
 }
 
 export class ChangeTaskStatusUseCase {
@@ -19,9 +22,19 @@ export class ChangeTaskStatusUseCase {
   ){}
 
   async execute(params: ChangeTaskStatusParams){
-    const { status,taskId, token } = params
+    const { status, taskId, token } = params
 
-    const { id } = this.tokenDecoder.decode(token); 
+    const { id: userId } = this.tokenDecoder.decode(token); 
+
+    const task = await this.repository.getTaskById(taskId);
+
+    if(!task) {
+      throw new NotFoundError('TASK_NOT_FOUND');
+    }
+
+    if(task.userId !== userId) {
+      throw new AuthorizationError('USER_NOT_ALLOWED_TO_EDIT_REQUESTED_TASK');
+    }
 
     const isValidStatus = Task.isValidStatus(status);
 
@@ -29,6 +42,6 @@ export class ChangeTaskStatusUseCase {
       throw new BadEntityError('INVALID_STATUS')
     }
 
-    await this.repository.updateTaskStatus(taskId, status, id);
+    await this.repository.updateTaskStatus(taskId, status);
   }
 }

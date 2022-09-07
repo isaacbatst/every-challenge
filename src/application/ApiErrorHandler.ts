@@ -1,7 +1,9 @@
 import { NextApiResponse } from "next";
 import { AuthenticationError } from "../errors/AuthenticationError";
+import { AuthorizationError } from "../errors/AuthorizationError";
 import { BadEntityError } from "../errors/BadEntityError";
 import { ConflictError } from "../errors/ConflictError";
+import { NotFoundError } from "../errors/NotFoundError";
 import { ValidationError } from "../errors/ValidationError";
 
 export class ApiErrorHandler {
@@ -20,6 +22,14 @@ export class ApiErrorHandler {
 
     if(err instanceof ConflictError) {
       return res.status(409).json({ error: err.message })
+    }
+
+    if(err instanceof NotFoundError) {
+      return res.status(404).json({ error: err.message })
+    }
+
+    if(err instanceof AuthorizationError) {
+      return res.status(403).json({ error: err.message })
     }
 
     console.error(err)

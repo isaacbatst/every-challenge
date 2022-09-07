@@ -21,6 +21,11 @@ export interface TaskDTO {
   status: TaskStatus;
 }
 
+export interface TaskDTOWithIds extends TaskDTO { 
+  id: string 
+  userId: string
+}
+
 export class Task {
   private title: string;
   private description: string;

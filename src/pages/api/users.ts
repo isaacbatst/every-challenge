@@ -49,8 +49,6 @@ const handleCreateUser: NextApiHandler = async (req, res) => {
   
   CookiesManager.setToken(req, res, token);
 
-  // returning token ALSO bellow to ease testing via apps like insomnia/postman
-  // but it has been already set on http only cookie
   return res.status(201).end();
 }
 
