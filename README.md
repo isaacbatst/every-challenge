@@ -1,7 +1,7 @@
 # Every Challenge
 
 ## Requirements
-### Domain
+### Domain (with tests)
 - [X] Create User
 - [X] Authenticate User
 - [X] Create Task
