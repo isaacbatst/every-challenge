@@ -8,9 +8,16 @@ const validUser: UserToBeAuthenticatedDTO = {
 
 class RepositoryMock implements AuthenticateUserRepository {
   foundUser = true
-  getUserByEmail = jest.fn(() => Promise.resolve(
-    this.foundUser ? validUser : null
-  ));
+  getUserByEmail = jest.fn(async () => {
+    if(!this.foundUser) {
+      return null;
+    }
+
+    return {
+      ...validUser,
+      id: 'any-id'
+    }
+  });
 }
 
 class EncrypterMock implements AuthenticateUserEncrypter {

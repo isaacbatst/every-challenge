@@ -1,12 +1,15 @@
 import { UserToBeAuthenticated, UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
+import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface AuthenticateUserParams {
   email: string;
   password: string;
 }
 
+
+
 export interface AuthenticateUserRepository {
-  getUserByEmail(email: string): Promise<UserToBeAuthenticatedDTO | null>
+  getUserByEmail(email: string): Promise<UserToBeAuthenticatedDTO & { id: string } | null>
 }
 
 export interface AuthenticateUserEncrypter {
@@ -14,7 +17,7 @@ export interface AuthenticateUserEncrypter {
 }
 
 export interface AuthenticateUserTokenGenerator {
-  generate(): string 
+  generate(payload: TokenPayload): string 
 }
 
 export class AuthenticateUserUseCase {
@@ -42,7 +45,7 @@ export class AuthenticateUserUseCase {
       throw new Error('INVALID_AUTHENTICATION');
     }
 
-    const token = this.tokenGenerator.generate();
+    const token = this.tokenGenerator.generate({ id: userFoundByEmail.id });
 
     return {
       token

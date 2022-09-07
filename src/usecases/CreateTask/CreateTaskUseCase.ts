@@ -1,21 +1,30 @@
 import { Task, TaskDTO, TaskStatus } from "../../entities/Task/Task";
+import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface CreateTaskParams {
   title: string;
   description: string;
   status: string;
+  token: string
 }
 
 export interface CreateTaskRepository {
-  create(task: TaskDTO): Promise<void>
+  create(task: TaskDTO, userId: string): Promise<void>
+}
+
+export interface CreateTaskTokenDecoder {
+  decode(token: string): TokenPayload
 }
 
 export class CreateTaskUseCase {
   constructor(
-    private repository: CreateTaskRepository
+    private repository: CreateTaskRepository,
+    private tokenDecoder: CreateTaskTokenDecoder
   ){}
 
   async execute(params: CreateTaskParams) {
+    const tokenPayload = this.tokenDecoder.decode(params.token)
+
     const task = new Task({
       description: params.description,
       status: params.status,
@@ -26,6 +35,6 @@ export class CreateTaskUseCase {
       description: task.getDescription(),
       status: task.getStatus(),
       title: task.getTitle()
-    })
+    }, tokenPayload.id)
   }
 }
