@@ -1,5 +1,6 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { TaskDTO, TaskDTOWithIds, TaskStatus } from '../../entities/Task/Task';
+import { NotFoundError } from '../../errors/NotFoundError';
 import { ValidationError } from '../../errors/ValidationError';
 import { ChangeTaskStatusRepository } from '../../usecases/ChangeTaskStatus/ChangeTaskStatusUseCase';
 import { CreateTaskRepository } from '../../usecases/CreateTask/CreateTaskUseCase';
@@ -9,18 +10,28 @@ import { prisma } from '../prisma';
 
 export class PrismaTaskRepository implements CreateTaskRepository, GetMyTasksRepository, ChangeTaskStatusRepository {
   async create(task: TaskDTO, userId: string): Promise<void> {
-    await prisma.task.create({
-      data: {
-        description: task.description,
-        status: task.status,
-        title: task.title,
-        user: {
-          connect: {
-            id: userId
+    try {
+      await prisma.task.create({
+        data: {
+          description: task.description,
+          status: task.status,
+          title: task.title,
+          user: {
+            connect: {
+              id: userId
+            }
           }
         }
+      })
+    } catch (err) {
+      if(err instanceof PrismaClientKnownRequestError) {
+        if(err.code === PrismaErrors.DEPENDS_ON_NOT_FOUND_RECORD) {
+          throw new NotFoundError('USER_NOT_FOUND');
+        }
       }
-    })
+
+      throw new Error('UNKNOWN_ERROR')
+    }
   }
 
   async getTasksByUserId(userId: string): Promise<TaskDTOWithIds[]> {
