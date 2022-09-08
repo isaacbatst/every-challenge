@@ -1,9 +1,9 @@
 import 'dotenv/config'
 
-import { TokenGenerator } from "../interfaces/TokenGenerator";
-import { TokenPayload } from "../interfaces/TokenPayload";
+import { TokenGenerator } from "../domain/interfaces/TokenGenerator";
+import { TokenPayload } from "../domain/interfaces/TokenPayload";
 import jwt from 'jsonwebtoken'
-import { TokenDecoder } from '../interfaces/TokenDecoder';
+import { TokenDecoder } from '../domain/interfaces/TokenDecoder';
 import { AuthenticationError } from '../errors/AuthenticationError';
 
 export class JwtTokenHandler implements TokenGenerator, TokenDecoder {

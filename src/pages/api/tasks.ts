@@ -2,11 +2,11 @@ import { NextApiHandler } from "next";
 import { ApiErrorHandler } from "../../application/ApiErrorHandler";
 import { CookiesManager } from "../../application/CookiesManager";
 import { JwtTokenHandler } from "../../application/JwtTokenGenerator";
+import { CreateTaskUseCase } from "../../domain/usecases/CreateTask/CreateTaskUseCase";
+import { GetMyTasksUseCase } from "../../domain/usecases/GetMyTasks/GetMyTasksUseCase";
 import { AuthenticationError } from "../../errors/AuthenticationError";
 import { ValidationError } from "../../errors/ValidationError";
 import { PrismaTaskRepository } from "../../infra/repositories/PrismaTaskRepository";
-import { CreateTaskUseCase } from "../../usecases/CreateTask/CreateTaskUseCase";
-import { GetMyTasksUseCase } from "../../usecases/GetMyTasks/GetMyTasksUseCase";
 
 const handler: NextApiHandler = async (req, res) => {
   try {

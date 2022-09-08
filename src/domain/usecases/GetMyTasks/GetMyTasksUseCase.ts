@@ -1,5 +1,5 @@
-import { TaskDTOWithIds } from "../../entities/Task/Task";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
+import { TaskDTOWithIds } from "../../entities/Task/Task";
 
 interface GetMyTasksParams {
   token: string

@@ -1,4 +1,4 @@
-import { ValidationError } from "../../errors/ValidationError";
+import { ValidationError } from "../../../errors/ValidationError";
 
 export class Password {
   private password: string;

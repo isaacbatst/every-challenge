@@ -2,10 +2,10 @@ import { NextApiHandler } from "next";
 import { ApiErrorHandler } from "../../../application/ApiErrorHandler";
 import { CookiesManager } from "../../../application/CookiesManager";
 import { JwtTokenHandler } from "../../../application/JwtTokenGenerator";
+import { ChangeTaskStatusUseCase } from "../../../domain/usecases/ChangeTaskStatus/ChangeTaskStatusUseCase";
 import { AuthenticationError } from "../../../errors/AuthenticationError";
 import { ValidationError } from "../../../errors/ValidationError";
 import { PrismaTaskRepository } from "../../../infra/repositories/PrismaTaskRepository";
-import { ChangeTaskStatusUseCase } from "../../../usecases/ChangeTaskStatus/ChangeTaskStatusUseCase";
 
 const handler: NextApiHandler = async (req, res) => {
   try {

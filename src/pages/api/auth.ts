@@ -3,9 +3,9 @@ import { ApiErrorHandler } from "../../application/ApiErrorHandler";
 import { BcrypEncrypter } from "../../application/BcryptEncrypter";
 import { CookiesManager } from "../../application/CookiesManager";
 import { JwtTokenHandler } from "../../application/JwtTokenGenerator";
+import { AuthenticateUserUseCase } from "../../domain/usecases/AuthenticateUser/AuthenticateUserUseCase";
 import { ValidationError } from "../../errors/ValidationError";
 import { PrismaUserRepository } from "../../infra/repositories/PrismaUserRepository";
-import { AuthenticateUserUseCase } from "../../usecases/AuthenticateUser/AuthenticateUserUseCase";
 
 const handler: NextApiHandler = async (req, res) => {
   try {

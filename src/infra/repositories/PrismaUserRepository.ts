@@ -1,9 +1,9 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
-import { UserToBeCreatedDTO } from "../../entities/User/UserToBeCreated";
+import { UserToBeAuthenticatedDTO } from "../../domain/entities/User/UserToBeAuthenticated";
+import { UserToBeCreatedDTO } from "../../domain/entities/User/UserToBeCreated";
+import { AuthenticateUserRepository } from "../../domain/usecases/AuthenticateUser/AuthenticateUserUseCase";
+import { CreateUserRepository } from "../../domain/usecases/CreateUser/CreateUserUseCase";
 import { ConflictError } from "../../errors/ConflictError";
-import { AuthenticateUserRepository } from "../../usecases/AuthenticateUser/AuthenticateUserUseCase";
-import { CreateUserRepository } from "../../usecases/CreateUser/CreateUserUseCase";
 import { PrismaErrors } from "../errors";
 import { prisma } from '../prisma';
 

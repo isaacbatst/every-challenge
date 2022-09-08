@@ -1,7 +1,7 @@
+import { AuthorizationError } from "../../../errors/AuthorizationError";
+import { BadEntityError } from "../../../errors/BadEntityError";
+import { NotFoundError } from "../../../errors/NotFoundError";
 import { Task, TaskDTOWithIds, TaskStatus } from "../../entities/Task/Task";
-import { AuthorizationError } from "../../errors/AuthorizationError";
-import { BadEntityError } from "../../errors/BadEntityError";
-import { NotFoundError } from "../../errors/NotFoundError";
 import { TokenDecoder } from "../../interfaces/TokenDecoder";
 
 interface ChangeTaskStatusParams {

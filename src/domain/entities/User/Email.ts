@@ -1,4 +1,4 @@
-import { ValidationError } from "../../errors/ValidationError";
+import { ValidationError } from "../../../errors/ValidationError";
 
 export class Email {
   static EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

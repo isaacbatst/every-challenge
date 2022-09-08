@@ -1,10 +1,10 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { TaskDTO, TaskDTOWithIds, TaskStatus } from '../../entities/Task/Task';
+import { TaskDTO, TaskDTOWithIds, TaskStatus } from '../../domain/entities/Task/Task';
+import { ChangeTaskStatusRepository } from '../../domain/usecases/ChangeTaskStatus/ChangeTaskStatusUseCase';
+import { CreateTaskRepository } from '../../domain/usecases/CreateTask/CreateTaskUseCase';
+import { GetMyTasksRepository } from '../../domain/usecases/GetMyTasks/GetMyTasksUseCase';
 import { NotFoundError } from '../../errors/NotFoundError';
 import { ValidationError } from '../../errors/ValidationError';
-import { ChangeTaskStatusRepository } from '../../usecases/ChangeTaskStatus/ChangeTaskStatusUseCase';
-import { CreateTaskRepository } from '../../usecases/CreateTask/CreateTaskUseCase';
-import { GetMyTasksRepository } from '../../usecases/GetMyTasks/GetMyTasksUseCase';
 import { PrismaErrors } from '../errors';
 import { prisma } from '../prisma';
 

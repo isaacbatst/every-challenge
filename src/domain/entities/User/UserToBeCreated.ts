@@ -1,4 +1,4 @@
-import { ValidationError } from "../../errors/ValidationError";
+import { ValidationError } from "../../../errors/ValidationError";
 import { Email } from "./Email";
 import { Password } from "./Password";
 

@@ -1,5 +1,5 @@
+import { AuthenticationError } from "../../../errors/AuthenticationError";
 import { UserToBeAuthenticated, UserToBeAuthenticatedDTO } from "../../entities/User/UserToBeAuthenticated";
-import { AuthenticationError } from "../../errors/AuthenticationError";
 import { TokenPayload } from "../../interfaces/TokenPayload";
 
 interface AuthenticateUserParams {

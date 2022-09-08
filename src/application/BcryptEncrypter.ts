@@ -1,6 +1,6 @@
-import { UserToBeCreatedEncrypter } from "../entities/User/UserToBeCreated";
 import bcrypt from 'bcryptjs';
-import { AuthenticateUserEncrypter } from "../usecases/AuthenticateUser/AuthenticateUserUseCase";
+import { UserToBeCreatedEncrypter } from '../domain/entities/User/UserToBeCreated';
+import { AuthenticateUserEncrypter } from '../domain/usecases/AuthenticateUser/AuthenticateUserUseCase';
 
 export class BcrypEncrypter implements UserToBeCreatedEncrypter, AuthenticateUserEncrypter {
   async hash(value: string): Promise<string> {
