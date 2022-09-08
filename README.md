@@ -30,6 +30,34 @@ You have 3 possible setups.
 - [X] Get My Tasks
 - [X] Change Task Status
 
+## The Whys
+### Architecture
+I chose to invest time into the domain layer. I have used OOP features and SOLID principles, to ensure the quality and the decoupling of this layer, giving us:
+  - isolated testing easily, ensuring the domain logic separatedly
+  - a more comfortable way to change the "edge techs", such as the chosen Next and Prisma, as the logic is protected at the domain.
+  - clear separation of responsabilitties.
+
+### Next.js
+I first thought on writing a simple express API, but I chose Next, thinking on:
+  - Deploying at a serverless solution easily, like vercel.
+  - Expanding to a fullstack project (adding frontend).
+
+### Cookies + JWT
+First, I chose to use Cookies (http-only) and not returning the token to the client handle it, to take the responsability, as this is only a backend project, I chose to control how safely the token is being stored.
+
+Second, about JWT: in order to don't have to create a Session persistance, I brought JWT to give me a easy way to identify users. I won't have the power to invalidate a session or to manage them somehow (like listing the user's sessions for him), but for the give use case, the JWT fits.
+
+### Bcrypt.js
+A nice solution to generate salted passwords hashes without caring to store the salt, in order to at the login compare the hash with a provided password.
+
+### Prisma
+Excelent solution to build up the database models quickly.
+
+### MongoDB
+Given the simplicity of the data, I didn't have to enforce complex relationships, so I picked Mongo, witch comes with the Replica Set feature, focused on high availability, that scales very well the reading power.
+
+## Specifications
+
 ### User
 - Password: Minimum eight characters, at least one letter and one number
 - Name: Minimum two characters, up to 80 characters.
