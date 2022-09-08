@@ -1,5 +1,13 @@
 # Every Challenge
 
+## Deploy
+
+The project is deployed at [vercel](https://every-challenge.vercel.app/api/).
+
+You can find the api documentation [here](https://documenter.getpostman.com/view/9558570/VVBUyn1t).
+
+> The mongodb server is a mongodb atlas project.
+
 ## Setup
 
 You have 3 possible setups.
@@ -66,3 +74,6 @@ Given the simplicity of the data, I didn't have to enforce complex relationships
 - Title: Minimum one character, up to 50.
 - Description: Minimum one character, up to 200.
 - Status: TODO, IN_PROGRESS, DONE, ARCHIVED
+
+### Authentication
+- The cookie `Every-todo-app-Authorization` is saved at login and user creation, with a signed JWT.
