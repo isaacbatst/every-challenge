@@ -53,7 +53,7 @@ I first thought on writing a simple express API, but I chose Next, thinking on:
 ### Cookies + JWT
 First, I chose to use Cookies (http-only) and not returning the token to the client handle it, to take the responsability, as this is only a backend project, I chose to control how safely the token is being stored.
 
-Second, about JWT: in order to don't have to create a Session persistance, I brought JWT to give me a easy way to identify users. I won't have the power to invalidate a session or to manage them somehow (like listing the user's sessions for him), but for the give use case, the JWT fits.
+Second, about JWT: in order to don't have to create a *Session persistance*, I brought JWT to give me a easy way to identify users. I won't have the power to invalidate a session or to manage them somehow - like listing the user's sessions for him - but for the given use case, the JWT fits.
 
 ### Bcrypt.js
 A nice solution to generate salted passwords hashes without caring to store the salt, in order to at the login compare the hash with a provided password.
