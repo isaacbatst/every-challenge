@@ -1,0 +1,17 @@
+services: 
+  app:
+    build: .
+    ports: 
+      - 3000:3000
+      
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: every-todo-mongodb
+    ports:
+      - 27017:27017
+    extra_hosts:
+      - mongodb:0.0.0.0 
+    command: ["--replSet", "every-todo-app-set", "--bind_ip_all"]
+    volumes:
+      - ./scripts/:/docker-entrypoint-initdb.d:ro
