@@ -77,3 +77,6 @@ Given the simplicity of the data, I didn't have to enforce complex relationships
 
 ### Authentication
 - The cookie `Every-todo-app-Authorization` is saved at login and user creation, with a signed JWT.
+
+## Extra
+Besides the backend project, the frontend is being implemented [here](https://github.com/isaacbatst/every-challenge/pull/1)
