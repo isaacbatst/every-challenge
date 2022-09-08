@@ -21,7 +21,7 @@ export class ApiErrorHandler {
       const code = this.errorToCode[err.name];
     
       if(this.errorToCode[err.name]) {
-        return res.status(code).json(err.message)
+        return res.status(code).json({ error: err.message })
       }
     }
 
