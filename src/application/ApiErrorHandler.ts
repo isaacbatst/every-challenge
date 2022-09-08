@@ -1,10 +1,4 @@
 import { NextApiResponse } from "next";
-import { AuthenticationError } from "../errors/AuthenticationError";
-import { AuthorizationError } from "../errors/AuthorizationError";
-import { BadEntityError } from "../errors/BadEntityError";
-import { ConflictError } from "../errors/ConflictError";
-import { NotFoundError } from "../errors/NotFoundError";
-import { ValidationError } from "../errors/ValidationError";
 
 export class ApiErrorHandler {
   static errorToCode: Record<string, number> = {
