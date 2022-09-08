@@ -38,8 +38,3 @@ You have 3 possible setups.
 - Title: Minimum one character, up to 50.
 - Description: Minimum one character, up to 200.
 - Status: TODO, IN_PROGRESS, DONE, ARCHIVED
-
-
-### Local Setup
-- Create a `.env` with required fields (see `.env.example`)
-- Have a MongoDB 4.2+ server with a replica set deployment.
